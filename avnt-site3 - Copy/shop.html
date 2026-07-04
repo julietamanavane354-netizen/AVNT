@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop — AVNT</title>
+<meta name="description" content="Coleção AVNT. Argentina, Brasil, Espanha. T-shirts, sweatpants e sets completos.">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .filter-bar{ display:flex; gap:10px; flex-wrap:wrap; }
+  .filter-btn{
+    padding:9px 18px; border:1px solid var(--line-light);
+    font-size:11.5px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;
+    transition:background .2s, color .2s, border-color .2s;
+  }
+  .filter-btn.active{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+  .shop-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line-light); margin-top:40px; }
+  .p-card{ background:var(--paper); display:flex; flex-direction:column; }
+  .p-card .p-img{ aspect-ratio:1/1.15; overflow:hidden; background:var(--paper-dim); }
+  .p-card .p-img img{ width:100%; height:100%; object-fit:cover; transition:transform .5s var(--ease); }
+  .p-card:hover .p-img img{ transform:scale(1.045); }
+  .p-body{ padding:20px 22px 24px; display:flex; flex-direction:column; gap:6px; flex:1; }
+  .p-cap{ font-size:10.5px; letter-spacing:0.18em; text-transform:uppercase; color:var(--stone); }
+  .p-name{ font-family:'Archivo'; font-weight:700; text-transform:uppercase; font-size:16.5px; letter-spacing:-0.01em; }
+  .p-price{ margin-top:auto; padding-top:10px; font-size:14px; font-weight:600; }
+  .set-band{
+    margin-top:2px; background:var(--ink); color:var(--paper);
+    display:grid; grid-template-columns:repeat(3,1fr); gap:2px;
+  }
+  .set-card{ background:var(--ink-soft); display:flex; flex-direction:column; }
+  .set-img{ aspect-ratio:1/1; overflow:hidden; background:var(--paper-dim); }
+  .set-img img{ width:100%; height:100%; object-fit:cover; transition:transform .5s var(--ease); }
+  .set-card:hover .set-img img{ transform:scale(1.045); }
+  .set-body{ padding:26px 26px 30px; display:flex; flex-direction:column; gap:10px; flex:1; }
+  .set-card .p-cap{ color:var(--stone-light); }
+  .set-price{ display:flex; align-items:baseline; gap:10px; margin-top:6px; }
+  .set-old{ text-decoration:line-through; opacity:0.5; font-size:13px; }
+  .set-new{ font-family:'Archivo'; font-weight:900; font-size:20px; }
+  @media (max-width:820px){ .shop-grid, .set-band{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:560px){ .shop-grid, .set-band{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a href="index.html" class="nav-word">AVNT</a>
+  <nav class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="shop.html" class="active">Shop</a>
+    <a href="about.html">About</a>
+    <a href="#sets" class="nav-cta">Sets</a>
+  </nav>
+  <button class="nav-burger">Menu</button>
+</header>
+
+<div class="mobile-menu" style="position:fixed;inset:0;top:0;background:var(--ink);z-index:150;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;transform:translateY(-100%);transition:transform .4s var(--ease);"></div>
+
+<section class="pt-nav section-pad" style="padding-bottom:0;">
+  <div class="wrap">
+    <p class="eyebrow reveal" style="margin-bottom:18px;">Coleção Completa</p>
+    <h1 class="reveal" style="font-size:clamp(38px,7vw,84px);margin-bottom:34px;">Shop.</h1>
+    <div class="filter-bar reveal" id="filters">
+      <button class="filter-btn active" data-filter="all">Todas</button>
+      <button class="filter-btn" data-filter="argentina">Argentina</button>
+      <button class="filter-btn" data-filter="brasil">Brasil</button>
+      <button class="filter-btn" data-filter="espanha">Espanha</button>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" style="padding-top:0;">
+  <div class="wrap">
+    <div class="shop-grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="section-pad" style="padding-top:0;" id="sets">
+  <div class="wrap">
+    <p class="eyebrow reveal" style="margin-bottom:18px;">Poupa a comprar o par</p>
+    <h2 class="reveal" style="font-size:clamp(28px,5vw,48px);margin-bottom:34px;">Sets Completos.</h2>
+    <div class="set-band" id="setband"></div>
+  </div>
+</section>
+
+<footer id="footer-slot"></footer>
+<a class="float-wa" target="_blank" href="#" id="wa-float" aria-label="WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.8c2.17 0 4.21.85 5.74 2.38a8.08 8.08 0 0 1 2.38 5.73c0 4.47-3.64 8.11-8.12 8.11a8.1 8.1 0 0 1-4.13-1.13l-.3-.17-3.11.82.83-3.03-.19-.31a8.06 8.06 0 0 1-1.24-4.32c0-4.47 3.65-8.11 8.14-8.11m-4.6 4.6c-.16 0-.43.06-.65.31s-.86.84-.86 2.04.88 2.37 1 2.53c.13.17 1.72 2.7 4.28 3.72 2.12.85 2.55.68 3.01.64.46-.05 1.48-.6 1.69-1.19.21-.58.21-1.08.15-1.19-.07-.11-.24-.17-.5-.3-.27-.13-1.58-.78-1.83-.87s-.42-.13-.6.13c-.18.27-.68.87-.84 1.04-.15.18-.31.2-.57.07-.27-.13-1.13-.42-2.15-1.34-.8-.71-1.33-1.59-1.49-1.86-.15-.27-.02-.41.12-.54.12-.12.27-.31.4-.47.13-.16.18-.27.27-.45.09-.18.05-.34-.02-.47-.07-.13-.6-1.48-.83-2.02-.22-.53-.44-.46-.6-.47-.16-.01-.34-.01-.5-.01z"/></svg>
+</a>
+
+<script src="js/products.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const grid = document.getElementById('grid');
+  const setband = document.getElementById('setband');
+
+  function renderProducts(filter){
+    grid.innerHTML = AVNT_PRODUCTS
+      .filter(p => filter === 'all' || p.capsule === filter)
+      .map(p => `
+        <a href="product.html?id=${p.id}" class="p-card">
+          <div class="p-img"><img src="${p.images[0]}" alt="${p.name}"></div>
+          <div class="p-body">
+            <span class="p-cap">${p.capsuleLabel} · ${p.type}</span>
+            <span class="p-name">${p.name}</span>
+            <span class="p-price">${avntFormatPrice(p.price)}</span>
+          </div>
+        </a>`).join('');
+  }
+
+  setband.innerHTML = AVNT_SETS.map(s => `
+    <div class="set-card" id="${s.capsule}">
+      <div class="set-img"><img src="${s.image}" alt="${s.name}"></div>
+      <div class="set-body">
+        <span class="p-cap">${s.capsuleLabel} · Set Completo</span>
+        <span class="p-name" style="color:var(--paper);">Tee + Pants</span>
+        <div class="set-price">
+          <span class="set-old">${avntFormatPrice(s.oldPrice)}</span>
+          <span class="set-new">${avntFormatPrice(s.price)}</span>
+        </div>
+        <a class="btn btn-solid on-dark" style="margin-top:10px;width:fit-content;" target="_blank"
+           href="${avntWaLink('Olá AVNT! Quero o ' + s.name + ' (' + avntFormatPrice(s.price) + ').')}">Comprar Set</a>
+      </div>
+    </div>`).join('');
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderProducts(btn.dataset.filter);
+    });
+  });
+
+  const hashFilter = location.hash.replace('#','');
+  const initial = ['argentina','brasil','espanha'].includes(hashFilter) ? hashFilter : 'all';
+  if (initial !== 'all') {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === initial));
+  }
+  renderProducts(initial);
+
+  const waMsg = "Olá AVNT! Quero saber mais sobre a coleção.";
+  document.getElementById('wa-float').href = avntWaLink(waMsg);
+  document.getElementById('footer-slot').outerHTML = `
+  <footer>
+    <div class="wrap">
+      <div class="foot-top">
+        <div class="foot-word display">AVNT</div>
+        <p class="eyebrow" style="max-width:220px;text-align:right;">Future in Motion.<br>Dream Chasers.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h4>Navegar</h4>
+          <a href="index.html">Home</a>
+          <a href="shop.html">Shop</a>
+          <a href="about.html">About</a>
+        </div>
+        <div class="foot-col">
+          <h4>Contacto</h4>
+          <a href="${avntWaLink('Olá AVNT! Quero saber mais.')}" target="_blank">WhatsApp</a>
+          <a href="https://instagram.com/avntwrld" target="_blank">Instagram</a>
+        </div>
+        <div class="foot-col">
+          <h4>Comunidade</h4>
+          <span>Dream Chasers</span>
+          <span>Moçambique · Global</span>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© AVNT — Todos os direitos reservados</span>
+        <span>Built Different</span>
+      </div>
+    </div>
+  </footer>`;
+</script>
+</body>
+</html>
